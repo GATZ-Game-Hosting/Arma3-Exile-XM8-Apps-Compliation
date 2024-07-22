@@ -1,0 +1,47 @@
+ /*
+ * XM8 App Base Marker
+ * Created by - Crito @Vanaheim Gaming Servers
+ * Discord - https://discord.gg/WEFzqPa
+ * Date Created - 5/21/2023
+ * Version - 1
+ * Version Date - 5/21/2023
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the baseMarker folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App05_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\baseMarker\baseMarker.paa";
+			text = "Base Marker";
+			onButtonClick = "execVM 'custom\xm8_apps\baseMarker\code\baseMarker_Load.sqf'";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+5. go to description.ext of mission.map.pbo and paste in the following
+		
+		#include "custom\xm8_apps\baseMarker\GUI\defines.hpp"
+		#include "custom\xm8_apps\baseMarker\GUI\dialog.hpp"
+
+6. Finally if you use infistar make sure you whitelist the IDD for this App.
+   otherwise regular non admin players will get the displays auto closed on them.
+   IDD white list can be found in @infiSTAR_Exile on your server then In addons folder unpbo the a3_infiSTAR_Exile.pbo
+   and open up EXILE_AHAT_CONFIG.hpp. Find the following and put in the idd accordinly.
+   
+		////////////////IDD TO ADD //////////////////////
+			97500
+		//////////////////////////////////////////////// 
+		
+		//////////Example of what to look for in infistar////////////////// 
+			allowedIDDs[] =
+			{
+		/////////////////////////////////////////////////////////////////// 
+   
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+

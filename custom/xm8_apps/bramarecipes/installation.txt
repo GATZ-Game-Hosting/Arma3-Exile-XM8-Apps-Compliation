@@ -1,0 +1,74 @@
+ /*
+ * XM8 App bramarecipes
+ * Converted from ExadXM8 by - Crito @Vanaheim Gaming Servers
+ * Discord - https://discord.gg/WEFzqPa
+ * Date Created - 6/30/2023
+ * Version - 1
+ * Version Date - 6/30/2023
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the bramarecipes folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App05_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\bramarecipes\brama.paa";
+			text = "BRAma Recipes";
+			onButtonClick = "[]execVM 'custom\xm8_apps\bramarecipes\code\onload.sqf'"
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+5. go to description.ext of mission.map.pbo and paste in the following
+		
+		#include "custom\xm8_apps\bramarecipes\GUI\defines.hpp"
+		#include "custom\xm8_apps\bramarecipes\GUI\dialog.hpp"
+
+7. Finally if you use infistar make sure you whitelist the IDD for this App.
+   otherwise regular non admin players will get the displays auto closed on them.
+   IDD white list can be found in @infiSTAR_Exile on your server then In addons folder unpbo the a3_infiSTAR_Exile.pbo
+   and open up EXILE_AHAT_CONFIG.hpp. Find the following and put in the idd accordinly.
+   
+		////////////////IDD TO ADD //////////////////////
+			74510
+		//////////////////////////////////////////////// 
+		
+		//////////Example of what to look for in infistar////////////////// 
+			allowedIDDs[] =
+			{
+		/////////////////////////////////////////////////////////////////// 
+   
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+
+		by default all the exile recipes do not have a category defined to them so they will end up in the
+		uncategorized section of the recipes dropdown menu. If you want to have different categories you will
+		need to define your categories in each of the crafting recipes within your config.cpp of your mission.map.pbo
+		Example below of what one looks like with category defined.
+		
+			class CookBBQSandwich: Exile_AbstractCraftingRecipe
+			{
+				name = "Cook BBQ Sandwich";
+				pictureItem = "Exile_Item_BBQSandwich_Cooked";
+				requiresFire = 1;
+				returnedItems[] =
+				{
+					{1, "Exile_Item_BBQSandwich_Cooked"}
+				};
+				tools[] =
+				{
+					"Exile_Item_CookingPot"
+				};
+				components[] = 
+				{
+					{1, "Exile_Item_BBQSandwich"}
+				};
+				category = "Food";
+			};
+
+		The above example adds food category to recipes dropdown and this is one of the items
+		that will show up when the category is selected

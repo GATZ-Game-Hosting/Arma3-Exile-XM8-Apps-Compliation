@@ -1,0 +1,101 @@
+ /*
+ *//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ * This app allows you to call in chopper-carried airdrops of supplies or vehicles. You can configure as many aidrops as you'd like, with as many categories as you'd like.
+ * This is an Exile port of the original Airdrop Assistance script that I put together for A3Wasteland. Blame my laziness for the delay, I'm OK with that.
+ * Creation of vehicles, AI, and supply boxes is handled server side. Money handling is also completed by the server using Exile functions.
+ *
+ * XM8 App APOC_Airdrop_Assistance
+ * APOC_Airdrop_Assistance created by - osuapoc
+ * osuapoc credits:
+ * @Janski
+ * @AgentRev - for use of some of the A3Wasteland Functions
+ * @CreamPie - for the original inspiration to create the A3W Airdrop
+ * @Brun - The Brama Cookbook provided me with spacing and such for the app layout
+ * Props to the others fellows whose code I perused to understand dialog functions better. -If I've forgotten anyone specific, speak up!
+ * WolfkillArcadia was awesome enough to make the edits for compatibility with AdvancedBanking. So just check the config file for where that gets set.
+ * I have no idea if Advanced banking still works in this version of Exile, or if it's configs are still the same. So yeah, let me know if that part of airdrop is broken.
+ *//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ * Dynamic Air Drops lets player create thier own items to fill crates right from the xm8 or order vehicles
+ * without the server owner needing to build drops in config.sqf file. This system looks at server traders and gets
+ * the items/vehicles, prices, and respect from them. Server owners just have to blacklist in the config.sqf any traders, categories, or items 
+ * they do not want showing up in the xm8.
+ *
+ * Dynamic Trader Air Drops Created by - Crito @Vanaheim Gaming Servers
+ * Credits to osuapoc for the original version witch is still usable in this version if you choose to
+ * Discord - https://discord.gg/WEFzqPa
+ * Date Created - 5/29/2023
+ * Version - 1
+ * Version Date - 5/29/2023
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the APOC_Airdrop_Assistance folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App04_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa";
+			text = "Air Drop";
+			onButtonClick = "[]execVM 'custom\xm8_apps\APOC_Airdrop_Assistance\APOC_Airdrop_Assistance_XM8.sqf'";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+3. edit the config.sqf found in this package to your liking. 
+4. go to description.ext of mission.map.pbo and paste in the following
+		
+		#include "custom\xm8_apps\APOC_Airdrop_Assistance\GUI\defines.hpp"
+		#include "custom\xm8_apps\APOC_Airdrop_Assistance\GUI\dialog.hpp"
+
+5. go to init.sqf of your mission.map.pbo and paste the following. If you do not have an init.sqf you need to make one.
+
+	[] execVM "custom\xm8_apps\APOC_Airdrop_Assistance\init.sqf";
+
+6. now find class CfgRemoteExec in your mission.map.pbo this is either in your description.ext or you have moved it to its own file called 
+	CfgRemoteExec.hpp paste in the following.
+	
+		class APOC_srv_startAirdrop { allowedTargets=2;}; //APOC Air Drops
+
+
+	
+		//////////////////EXAMPLE////////////////////////////////////
+		class CfgRemoteExec
+			{
+				class Functions
+				{
+					mode = 1;
+					jip = 0;
+					class fnc_AdminReq { allowedTargets=2; };	// infiSTAR AntiHack
+					class fn_xm8apps_server { allowedTargets=2; };	// infiSTAR xm8apps
+					class ExileServer_system_network_dispatchIncomingMessage { allowedTargets=2; };	// ExileMod
+					class APOC_srv_startAirdrop { allowedTargets=2;}; //APOC Air Drops
+				};
+				class Commands
+				{
+					mode=0;
+					jip=0;
+				};
+			};
+		//////////////////////////////////////////////////////////////
+
+6. Finally if you use infistar make sure you whitelist the IDD for this App.
+   otherwise regular non admin players will get the displays auto closed on them.
+   IDD white list can be found in @infiSTAR_Exile on your server then In addons folder unpbo the a3_infiSTAR_Exile.pbo
+   and open up EXILE_AHAT_CONFIG.hpp. Find the following and put in the idd accordinly.
+  
+  ////////////////IDD TO ADD //////////////////////
+		975501
+  //////////////////////////////////////////////// 
+  
+  //////////Example of what to look for in infistar////////////////// 
+		allowedIDDs[] =
+		{
+  /////////////////////////////////////////////////////////////////// 
+   
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+
+DO NOT USE WITH Air Drop Standalone Exile XM8 App by Desa2k unexpedted things may happen!

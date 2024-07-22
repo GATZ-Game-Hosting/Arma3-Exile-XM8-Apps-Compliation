@@ -1,0 +1,23 @@
+
+#include "custom\xm8_apps\d2k\dialogs.hpp"
+
+
+class CfgFunctions
+{
+	#include "custom\xm8_apps\d2k\CfgFunctions.cpp"
+};
+
+class CfgRemoteExec
+{
+	class Functions
+	{
+		mode = 1;
+		jip = 1;
+		class d2k_fnc_srv_startairdrop { allowedTargets=2; };
+	};
+	class Commands
+	{
+		mode=0;
+		jip=1;
+	};
+};

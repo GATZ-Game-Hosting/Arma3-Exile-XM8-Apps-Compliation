@@ -1,0 +1,37 @@
+/*
+Air Strike XM8 App
+By Crito @Vanaheim Gaming Servers
+https://discord.gg/WEFzqPa
+v2 05/20/2023
+*/
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the AirStrike folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App06_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\AirStrike\airstrike.paa";
+			text = "Air Strike";
+			onButtonClick = "[] execVM 'custom\xm8_apps\AirStrike\AirStrike.sqf'";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+3. edit the config.sqf found in this package to your liking. 
+4. go to initPlayerLocal.sqf of mission.map.pbo and paste in the following
+		
+		[] execVM "custom\xm8_apps\AirStrike\AirStrike_init.sqf";
+
+5. In the root of this XM8_APPS package you will find a @ExileServer folder go into it and from the
+   addons folder copy out the airstrike.pbo and paste into your @ExileServer\addons of your server.
+   this is used for respect and pop tab transfer between server and client there is no editing of this
+   pbo.
+   
+
+	
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.

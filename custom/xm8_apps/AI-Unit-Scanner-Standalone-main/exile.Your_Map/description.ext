@@ -1,0 +1,8 @@
+
+#include "custom\xm8_apps\d2k\dialogs.hpp"
+
+
+class CfgFunctions
+{
+	#include "custom\xm8_apps\d2k\CfgFunctions.cpp"
+};
