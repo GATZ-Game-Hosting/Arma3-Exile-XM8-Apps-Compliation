@@ -1,0 +1,54 @@
+ /*
+ * XM8 App Rules
+ * Created by - Crito @Vanaheim Gaming Servers
+ * Discord - https://discord.gg/WEFzqPa
+ * Date Created - 5/19/2023
+ * Version - 1
+ * Version Date - 5/19/2023
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the xm8_Rules folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App04_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\xm8_Rules\icon\rules.paa";
+			text = "Server Rules";
+			onButtonClick = "execVM 'custom\xm8_apps\xm8_Rules\code\rules_Load.sqf'";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+3. edit the message.sqf found in this package to your liking. 
+4. edit the rulesApp_Init.sqf from this package to set your button text and web links.
+
+5. go to description.ext of mission.map.pbo and paste in the following
+		
+		#include "custom\xm8_apps\xm8_Rules\GUI\defines.hpp"
+		#include "custom\xm8_apps\xm8_Rules\GUI\dialog.hpp"
+
+6. go to initPlayerLocal.sqf of mission.map.pbo and paste in the following
+		
+		[]execVm "custom\XM8_APPS\xm8_Rules\rulesApp_Init.sqf";
+
+7. Finally if you use infistar make sure you whitelist the IDD's for this App found in Idds_ForInfistar_Whitelist.txt
+   otherwise regular non admin players will get the displays auto closed on them.
+   IDD white list can be found in @infiSTAR_Exile on your server then In addons folder unpbo the a3_infiSTAR_Exile.pbo
+   and open up EXILE_AHAT_CONFIG.hpp. Find the following and put in the idd accordinly.
+   
+		////////////////IDD TO ADD //////////////////////
+			96500
+		//////////////////////////////////////////////// 
+		
+		//////////Example of what to look for in infistar////////////////// 
+			allowedIDDs[] =
+			{
+		/////////////////////////////////////////////////////////////////// 
+	
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+

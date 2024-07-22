@@ -1,0 +1,39 @@
+
+///////////////////////////////////////////////////////////////////////////////
+// Exile Settings - Do not change these!
+///////////////////////////////////////////////////////////////////////////////
+showHUD[] =
+{
+    true,   // Scripted HUD (same as showHUD command)
+    true,   // Vehicle + soldier info
+    true,   // Vehicle radar
+    true,   // Vehicle compass
+    true,   // Tank direction indicator
+    true,  // Commanding menu
+    false,  // Group Bar
+    true,   // HUD Weapon Cursors
+    true   // Vehicle Panel (Required for GPS)
+}; 
+
+#include "custom\xm8_apps\d2k\dialogs.hpp"
+
+class CfgFunctions
+{
+	#include "custom\xm8_apps\d2k\CfgFunctions.cpp"
+};
+
+class CfgRemoteExec
+{
+	class Functions
+	{
+		mode = 1;
+		jip = 1;
+		class d2k_fnc_recruitai { allowedTargets=2; };
+	};
+	class Commands
+	{
+		mode=0;
+		jip=1;
+	};
+};
+

@@ -1,0 +1,90 @@
+ /*
+ * XM8 App VTracker
+ * Created by - Crito @Vanaheim Gaming Servers
+ * Discord - https://discord.gg/WEFzqPa
+ * Date Created - 6/03/2023
+ * Version - 1
+ * Version Date - 6/03/2023
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the vTracker folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App05_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\vTracker\vTracker.paa";
+			text = "Vehicle Tracker";
+			onButtonClick = "[]execVM 'custom\xm8_apps\vTracker\code\vTracker_Load.sqf'";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+5. go to description.ext of mission.map.pbo and paste in the following
+		
+		#include "custom\xm8_apps\vTracker\GUI\defines.hpp"
+		#include "custom\xm8_apps\vTracker\GUI\dialog.hpp"
+
+6. While in description.ext and you have a class CfgNetworkMessages than paste in the following into it
+   If you do not have CfgNetworkMessages than move to step 6.1
+	
+	////////////////////////////////////////////////////////////////////
+				class vTrackerRequest
+				{
+					module = "vTracker";
+					parameters[] = {"ARRAY"};
+				};
+				class vTrackerResponse
+				{
+					module = "vTracker";
+					parameters[] = {"ARRAY"};
+				};
+	////////////////////////////////////////////////////////////////////
+
+6.1 If you do not have class CfgNetworkMessages than paste in the following information
+
+	////////////////////////////////////////////////////////////////////
+			class CfgNetworkMessages
+			{
+				class vTrackerRequest
+				{
+					module = "vTracker";
+					parameters[] = {"ARRAY"};
+				};
+				class vTrackerResponse
+				{
+					module = "vTracker";
+					parameters[] = {"ARRAY"};
+				};
+			};
+	////////////////////////////////////////////////////////////////////////
+
+7. go to your initPlayerLocal found in your mission.map.pbo and paste in the following information
+
+	/////////////////////////////////////////////////////////////////////////
+		[] execVM "custom\xm8_apps\vTracker\vTracker_init.sqf";
+	/////////////////////////////////////////////////////////////////////////
+
+8. In the root of this XM8_APPS package you will find a @ExileServer folder go into it and from the
+   addons folder copy out the vTrackerServer.pbo and paste into your @ExileServer\addons of your server.
+   
+9. Finally if you use infistar make sure you whitelist the IDD for this App.
+   otherwise regular non admin players will get the displays auto closed on them.
+   IDD white list can be found in @infiSTAR_Exile on your server then In addons folder unpbo the a3_infiSTAR_Exile.pbo
+   and open up EXILE_AHAT_CONFIG.hpp. Find the following and put in the idd accordinly.
+   
+		////////////////IDD TO ADD //////////////////////
+			99715
+		//////////////////////////////////////////////// 
+		
+		//////////Example of what to look for in infistar////////////////// 
+			allowedIDDs[] =
+			{
+		/////////////////////////////////////////////////////////////////// 
+   
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+

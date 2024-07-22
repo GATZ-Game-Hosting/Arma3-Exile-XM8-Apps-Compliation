@@ -1,0 +1,172 @@
+ /*
+ * XM8 App emp
+ * Created by - Demetrios
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the emp folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App05_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\emp\icons\logo.paa";
+			text = "EMP";
+			onButtonClick = "[] ExecVM 'custom\xm8_apps\emp\clear_area.sqf'";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+5. go to description.ext of mission.map.pbo and find class CfgSounds
+   then paste in the following if you do not have class CfgSounds than copy skip down to the example and paste in the entire Example.
+		
+			class MWarningAlarm
+			{
+				name = "MWarningAlarm";
+				sound[] = {"custom\MWarning\alarm.ogg", 0.4, 0.8};
+				titles[] = {};
+			};
+			
+			class murmur
+			{
+				name = "murmur"; // Name for mission editor
+				sound[] = {"custom\xm8_apps\emp\sound\murmur.ogg", 0.8, 1.0};
+				titles[] = {0, ""};
+			};
+			class geiger
+			{
+				name = "geiger"; // Name for mission editor
+				sound[] = {"custom\xm8_apps\emp\sound\geiger.ogg", .7, 1.0};
+				titles[] = {0, ""};
+			};
+			class spark1
+			{
+				name = "spark1";
+				sound[] = {"custom\xm8_apps\emp\sound\spark1.ogg", db+5, 1};
+				titles[] = {};
+			};
+			class spark11
+			{
+				name = "spark11";
+				sound[] = {"custom\xm8_apps\emp\sound\spark11.ogg", db+5, 1};
+				titles[] = {};
+			};
+			class spark2
+			{
+				name = "spark2";
+				sound[] = {"custom\xm8_apps\emp\sound\spark2.ogg", db+5, 1};
+				titles[] = {};
+			};		
+			class spark22
+			{
+				name = "spark22";
+				sound[] = {"custom\xm8_apps\emp\sound\spark22.ogg", db+5, 1};
+				titles[] = {};
+			};	
+			class spark3	
+			{
+				name = "spark3";
+				sound[] = {"custom\xm8_apps\emp\sound\spark3.ogg", db+5, 1};
+				titles[] = {};
+			};
+			class spark4	
+			{
+				name = "spark4";
+				sound[] = {"custom\xm8_apps\emp\sound\spark4.ogg", db+5, 1};
+				titles[] = {};
+			};
+			class spark5	
+			{
+				name = "spark5";
+				sound[] = {"custom\xm8_apps\emp\sound\spark5.ogg", db+5, 1};
+				titles[] = {};
+			};
+			class tiuit
+			{
+				name = "tiuit"; // Name for mission editor
+				sound[] = {"custom\xm8_apps\emp\sound\tiuit.ogg", 0.2, 1.0};
+				titles[] = {0, ""};	
+			};
+
+////////////////////////////EXAMPLE/////////////////////////////////////////////////:
+
+		class CfgSounds
+			{
+				sounds[] = {};
+						
+				class MWarningAlarm
+				{
+					name = "MWarningAlarm";
+					sound[] = {"custom\MWarning\alarm.ogg", 0.4, 0.8};
+					titles[] = {};
+				};
+				
+				class murmur
+				{
+					name = "murmur"; // Name for mission editor
+					sound[] = {"custom\xm8_apps\emp\sound\murmur.ogg", 0.8, 1.0};
+					titles[] = {0, ""};
+				};
+				class geiger
+				{
+					name = "geiger"; // Name for mission editor
+					sound[] = {"custom\xm8_apps\emp\sound\geiger.ogg", .7, 1.0};
+					titles[] = {0, ""};
+				};
+				class spark1
+				{
+					name = "spark1";
+					sound[] = {"custom\xm8_apps\emp\sound\spark1.ogg", db+5, 1};
+					titles[] = {};
+				};
+				class spark11
+				{
+					name = "spark11";
+					sound[] = {"custom\xm8_apps\emp\sound\spark11.ogg", db+5, 1};
+					titles[] = {};
+				};
+				class spark2
+				{
+					name = "spark2";
+					sound[] = {"custom\xm8_apps\emp\sound\spark2.ogg", db+5, 1};
+					titles[] = {};
+				};		
+				class spark22
+				{
+					name = "spark22";
+					sound[] = {"custom\xm8_apps\emp\sound\spark22.ogg", db+5, 1};
+					titles[] = {};
+				};	
+				class spark3	
+				{
+					name = "spark3";
+					sound[] = {"custom\xm8_apps\emp\sound\spark3.ogg", db+5, 1};
+					titles[] = {};
+				};
+				class spark4	
+				{
+					name = "spark4";
+					sound[] = {"custom\xm8_apps\emp\sound\spark4.ogg", db+5, 1};
+					titles[] = {};
+				};
+				class spark5	
+				{
+					name = "spark5";
+					sound[] = {"custom\xm8_apps\emp\sound\spark5.ogg", db+5, 1};
+					titles[] = {};
+				};
+				class tiuit
+				{
+					name = "tiuit"; // Name for mission editor
+					sound[] = {"custom\xm8_apps\emp\sound\tiuit.ogg", 0.2, 1.0};
+					titles[] = {0, ""};	
+				};
+			};
+/////////////////////////////////////////////////////////////////////////////////////////			
+			
+   
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+

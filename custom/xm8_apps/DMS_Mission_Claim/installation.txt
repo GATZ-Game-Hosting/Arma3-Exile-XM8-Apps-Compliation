@@ -1,0 +1,74 @@
+ /*
+  *	XM8 App DMS_Mission_Claim
+  * By Ketanna & Crito @Vanaheim Gaming Servers
+  *	https://discord.gg/WEFzqPa
+  *	v1.0 10/02/2022
+  *	This Mission Claim script was created for use with DMS Mission System to claim mission with automated mission marker generation.
+  * Initally was made for DMS missions but will do missions from other scripts as well.
+  *	This code is the intellectual property of Ketanna and Crito, you may modify it as you see fit, but no monitary gains are permitted
+  *	using any portion of this code or its core function.
+*/
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the DMS_Mission_Claim folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App05_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "custom\xm8_apps\DMS_Mission_Claim\Images\missionClaimIcon.paa";
+			text = "Mission Claiming";
+			onButtonClick = "[false, _this] call DMS_Mission_Location_Show;";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+5. go to description.ext of mission.map.pbo and paste in the following
+	
+	#include "custom\xm8_apps\DMS_Mission_Claim\Dialog\DMS_ClaimMissionDefines.hpp"
+	#include "custom\xm8_apps\DMS_Mission_Claim\Dialog\DMS_ClaimMissionDiaglog.hpp"
+
+6. While your in description.ext find class CfgRemoteExec (you may have moved this to its own file called CfgRemoteExec.hpp)
+   Paste in the following.
+   
+   		class DMS_Mission_Location_show {allowedTargets=0;}; //DMS Mission Claiming
+		class DMS_Clear_Broken_Markers {allowedTargets=2;}; //DMS Mission Claiming
+
+		EXAMPLE:   
+			class CfgRemoteExec
+			{
+				class Functions
+				{
+					mode = 1;
+					jip = 0;
+					
+					class fnc_AdminReq { allowedTargets=2; };	// infiSTAR AntiHack
+					class fn_xm8apps_server { allowedTargets=2; };	// infiSTAR xm8apps
+					class ExileServer_system_network_dispatchIncomingMessage { allowedTargets=2; };	// ExileMod
+					class DMS_Mission_Location_show {allowedTargets=0;}; //DMS Mission Claiming
+					class DMS_Clear_Broken_Markers {allowedTargets=2;}; //DMS Mission Claiming
+				};
+				class Commands
+				{
+					mode=0;
+					jip=0;
+				};
+			};
+	
+7. Open init.sqf of your mission.map.pbo (if you do not have an init.sqf you need to make one).
+   Paste in the following.
+   
+   [] execVM "custom\xm8_apps\DMS_Mission_Claim\DMS_Mission_Claim_Init.sqf";
+
+8. Go into the DMS_Mission_Claim folder and open config.sqf to make sure all setting are going to work for your server. 
+   Make sure that within DMS missions config file that AI counter is turned off or this claim system will not work!!!
+
+   Optional: 	If you use infistar and want to have logs generated for claimed and unclaimed missions go to @ExileServer/addons found in
+				in this compilation package than copy and paste in
+				the missionclaim.pbo into your @ExileServer\addons folder. Make sure to have LogClaims set to true in config from step 8.
+
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+

@@ -1,0 +1,58 @@
+ /*
+ * XM8 App CHVD
+ */
+
+1. if you have a custom folder already in your mission.map.pbo than just put the xm8_apps folder into it.
+   if you have a xm8_apps folder already in your custom folder then put the CHVD folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+
+2. set up xm8 button similar to below example in config.cpp of mission.map.pbo
+
+	//////////////EXAMPLE BUTTON//////////////////////////////////////////////
+		class XM8_App05_Button: RscExileXM8AppButton1x1
+		{
+			textureNoShortcut = "\A3\Weapons_F\Data\UI\gear_binoculars_CA.paa";
+			text = "View Distance";
+			onButtonClick = "[] call CHVD_fnc_openDialog;";
+			resource = "";
+		};
+	////////////////////////////////////////////////////////////////////////////
+
+5. go to description.ext of mission.map.pbo and paste in the following
+		
+	#include "custom\xm8_apps\CHVD\dialog.hpp"
+	
+6. while still inside description.ext find class CfgFunctions and add the following inside the class
+	
+		#include "custom\xm8_apps\CHVD\CfgFunctions.hpp" 
+
+	Example:
+			class CfgFunctions
+			{
+					#include "custom\xm8_apps\CHVD\CfgFunctions.hpp" 
+			};
+
+7. go to init.sqf of misssion.map.pbo (if you do not have an init file you will need to make one).
+   Paste in the following and set them to your liking
+	
+	CHVD_allowNoGrass = false; //or true
+	CHVD_maxView = 12000;
+	CHVD_maxObj =12000;
+	
+8. Finally if you use infistar make sure you whitelist the IDD for this App.
+   otherwise regular non admin players will get the displays auto closed on them.
+   IDD white list can be found in @infiSTAR_Exile on your server then In addons folder unpbo the a3_infiSTAR_Exile.pbo
+   and open up EXILE_AHAT_CONFIG.hpp. Find the following and put in the idd accordinly.
+   
+		////////////////IDD TO ADD //////////////////////
+			2900
+		//////////////////////////////////////////////// 
+		
+		//////////Example of what to look for in infistar////////////////// 
+			allowedIDDs[] =
+			{
+		/////////////////////////////////////////////////////////////////// 
+   
+   NOTE: you can change file paths to your own but you will need to make necessary changes in other files
+		 within this package.
+
