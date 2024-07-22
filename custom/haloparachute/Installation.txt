@@ -1,0 +1,31 @@
+This is a standalone version of ExadXM8 parachute from air vehicles without having an actual parachute and not loosing 
+your backpack in the process.
+
+1. if you have a custom folder already in your mission.map.pbo than just put the haloparachute folder into it.
+   if you do not have a custom folder than put the whole custom folder into your mission.map.pbo
+   
+2. go to description.ext of mission.map.pbo and paste in the following into your class CfgFunctions
+   if you do not have class CfgFunctions than skip this step and move to step 2.1
+
+	//////////////////////////////////////////////////////////////
+		class ExAd
+		{
+			tag = "ExAd";
+			#include "custom\HaloParachute\CfgFunctions.cpp"
+		};
+	//////////////////////////////////////////////////////////////
+
+2.1 if you do not have class CfgFunctions than paste in the following
+	
+	//////////////////////////////////////////////////////////////
+		class CfgFunctions
+		{
+			class ExAd
+			{
+				tag = "ExAd";
+				#include "custom\HaloParachute\CfgFunctions.cpp"
+			};
+		};
+	//////////////////////////////////////////////////////////////
+
+3. finally go into haloparachute folder and edit the customize.sqf to your liking
